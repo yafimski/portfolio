@@ -30,10 +30,17 @@ function Quote() {
     }, 50);
   }, []);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    if (showText !== null && quoteRef.current) {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    if (
+      showText !== null &&
+      quoteRef.current &&
+      content[content.length - 1] === "."
+    ) {
+      const height = quoteRef.current.getBoundingClientRect().height;
+      window.scrollTo({
+        top: 0 + height / 2,
+        behavior: "smooth",
+      });
     }
   }, [content, showText]);
 
@@ -62,10 +69,8 @@ function Quote() {
 
   return (
     <div ref={quoteRef} className="quote-wrapper">
-      <div className="relative select-none justify-between max-w-screen-md text-left">
-        <b className="blockquotes">"</b>
+      <div className="relative max-w-screen-md select-none justify-between text-left">
         <span className="quote">{content}</span>
-        <b className="blockquotes absolute ml-6">"</b>
         <br />
         <br />
         <span className="quote-person">

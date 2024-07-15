@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amita:wght@400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -18,20 +20,50 @@
     font-family: "Raleway";
   }
 
+  .meri {
+    font-family: "Merienda";
+  }
+
   .center {
-    @apply justify-center items-center;
+    @apply items-center justify-center;
   }
 
   .head-wrapper {
-    @apply flex flex-col text-center center mt-24;
+    @apply center mt-24 flex flex-col text-center;
   }
 
   .headline {
-    @apply text-white text-5xl inter font-thin tracking-wide select-none;
+    @apply inter select-none text-5xl font-thin tracking-wide text-white;
   }
 
   .intro {
-    @apply text-left text-white text-2xl inter font-normal tracking-wider select-none mt-8 mb-32;
+    @apply inter mb-24 mt-8 flex w-full select-none flex-col text-2xl font-normal tracking-wider text-white transition-all duration-1000 ease-in-out;
+  }
+
+  .intro:hover {
+    @apply center;
+  }
+
+  .intro-item {
+    @apply transition duration-1000 ease-in-out;
+  }
+
+  .intro-item1 {
+    transform: translateX(-8rem);
+  }
+
+  .intro-item2 {
+    transform: translateX(-3rem);
+  }
+
+  .intro-item3 {
+    transform: translateX(8rem);
+  }
+
+  .intro:hover .intro-item1,
+  .intro:hover .intro-item2,
+  .intro:hover .intro-item3 {
+    transform: translateX(0);
   }
 
   .headline-highlight {
@@ -56,7 +88,7 @@
 
   .headline-highlight,
   .subtitle-highlight {
-    @apply transition ease-in select-none;
+    @apply select-none transition ease-in;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -70,56 +102,146 @@
     background-position: right;
   }
 
+  .social-icon {
+    @apply cursor-pointer text-2xl;
+  }
+
+  .quote-wrapper {
+    @apply center relative mt-12 flex w-4/5 flex-col;
+  }
+
+  .quote {
+    @apply meri text-sm italic leading-6 tracking-wider text-white;
+    font-weight: 100;
+  }
+
+  .quote-person {
+    @apply text-xs italic leading-6 tracking-wider text-white;
+  }
+
+  .quote::before {
+    content: "''";
+    @apply mr-4 text-3xl font-bold leading-none text-white;
+  }
+
+  .quote::after {
+    content: "''";
+    @apply ml-4 text-3xl font-bold leading-none text-white;
+  }
+
+  .activate-quote {
+    @apply meri absolute bottom-8 right-0 z-10 text-sm font-light text-pink-500 transition duration-500 ease-in-out;
+  }
+
+  .activate-quote:hover {
+    @apply cursor-pointer font-bold text-white;
+  }
+
   .projects {
     @apply flex-1;
   }
 
+  .projects-grid {
+    @apply mb-24 grid grid-cols-4 gap-16;
+  }
+
   .project-box {
-    @apply h-36 aspect-square col-span-1 bg-neutral-950 transition ease-out duration-500;
-    box-shadow: 0px 0px 24px 12px rgba(255, 255, 255, 0.15);
+    @apply center inter col-span-1 flex aspect-square h-36 overflow-hidden rounded-md bg-neutral-950 text-center text-xl tracking-widest text-white transition duration-500 ease-out;
+    box-shadow: 0px 0px 24px 12px rgba(255, 255, 255, 0.3);
+  }
+
+  .project-box:hover {
+    @apply project-shadow scale-105 bg-neutral-950 font-bold;
+    box-shadow: 0px 0px 24px 12px rgba(255, 255, 255, 0.5);
   }
 
   .project-shadow {
     box-shadow: 0px 0px 24px 12px rgba(255, 255, 255, 0.2);
   }
 
-  .project-box:hover {
-    @apply bg-neutral-900 scale-105 project-shadow;
+  .section-white,
+  .section-black {
+    display: flex;
+    min-height: 50rem;
   }
 
-  .project-content {
-    @apply absolute z-10 inset-0 m-auto bg-neutral-900 h-2/3 w-2/3 project-shadow transition ease-out duration-500;
+  .section-white {
+    @apply bg-neutral-50 text-neutral-950;
   }
 
-  .social-icon {
-    @apply cursor-pointer text-3xl;
+  .section-black {
+    @apply bg-neutral-950 text-white;
   }
 
-  .quote-wrapper {
-    @apply relative flex flex-col w-4/5 center mb-24 mt-12;
+  .resource-img {
+    @apply px-4;
   }
 
-  .quote {
-    @apply text-white text-sm leading-6 tracking-wider italic pl-4;
-    font-family: "Merienda";
-    font-weight: 100;
+  .resource-img:hover > img {
+    @apply scale-125 transition duration-500 ease-out;
   }
 
-  .quote-person {
-    @apply text-white leading-6 tracking-wider italic text-xs;
+  .project-title {
+    @apply inter mb-8 text-xl tracking-wider;
   }
 
-  .blockquotes {
-    @apply text-3xl text-white leading-none;
-    font-family: "Merienda";
+  .project-description {
+    @apply meri text-justify text-base font-light;
   }
 
-  .activate-quote {
-    @apply z-10 absolute bottom-8 right-0 text-pink-500 text-sm font-light transition duration-500 ease-in-out;
-    font-family: "Merienda";
+  .inline-link {
+    @apply text-blue-500;
   }
 
-  .activate-quote:hover {
-    @apply text-white font-bold cursor-pointer;
+  .me,
+  .her {
+    @apply py-1;
+  }
+
+  .me {
+    @apply text-pink-600;
+  }
+  .her {
+    @apply text-green-600;
+  }
+
+  .img-group {
+    @apply relative h-96 w-16 cursor-pointer overflow-hidden transition-all duration-500;
+  }
+
+  .flip-col {
+    @apply center col-span-2 col-start-2 m-auto w-44 bg-transparent;
+    perspective: 1000px;
+  }
+
+  .quantum-card {
+    @apply center relative flex aspect-[9/14] transform flex-col justify-evenly rounded-3xl bg-gradient-to-b from-zinc-900 to-slate-800 text-center transition duration-700;
+    transform-style: preserve-3d;
+    box-shadow: -2px 6px 16px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  .flip-col:hover .quantum-card {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    @apply center absolute flex h-full w-full flex-col text-white;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+
+  .quantum-card .quantum-text {
+    @apply px-8 text-xl tracking-wider;
+    font-family: "Urbanist";
+  }
+
+  .quantum-head {
+    @apply text-[8rem] italic leading-none tracking-wider;
+    font-family: "Amita";
   }
 }

@@ -6,12 +6,13 @@ function Head() {
         <br />A full-stack web developer.
       </h1>
       <h2 className="intro">
-        I embrace <span className="subtitle-highlight">challenges</span>
-        <br />
-        <p className="ml-32">
+        <p className="intro-item intro-item1">
+          I embrace <span className="subtitle-highlight">challenges</span>
+        </p>
+        <p className="intro-item intro-item2">
           I love <span className="subtitle-highlight"> design</span>
         </p>
-        <p className="ml-52">
+        <p className="intro-item intro-item3">
           I see things
           <span className="subtitle-highlight"> comprehensively</span>
         </p>
