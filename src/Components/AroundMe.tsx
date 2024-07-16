@@ -1,3 +1,5 @@
+import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SimpleIcon from "./SimpleIcon";
 
 const images = [
@@ -8,10 +10,17 @@ const images = [
 
 function AroundMe() {
   return (
-    <div className="m-0 grid grid-cols-12">
-      <div className="center relative col-span-6 m-auto overflow-hidden border-0">
+    <div className="m-0 flex flex-col-reverse lg:grid lg:grid-cols-12 lg:flex-col">
+      <div className="center col-span-2 col-start-2 flex md:m-auto md:mb-16 md:w-1/3 lg:m-0 lg:w-full">
+        <img
+          className="sm:rounded-xl"
+          src={"../../public/aroundme_appscreen.png"}
+          alt={"around me app"}
+        />
+      </div>
+      <div className="center relative col-span-5 col-start-4 m-auto overflow-hidden border-0">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="flex [&>div:hover]:w-[30rem] [&>hover:div]:w-16">
+          <div className="hidden sm:flex md:my-16 [&>div:hover]:w-[30rem] [&>hover:div]:w-16">
             {images.map((img) => (
               <div key={img} className="img-group">
                 <img className="h-full object-cover" src={img} alt={img} />
@@ -20,9 +29,18 @@ function AroundMe() {
           </div>
         </div>
       </div>
-      <div className="col-span-3 col-start-8 p-8 text-center">
+
+      <div className="col-span-3 col-start-9 p-8 text-center">
         <h1 className="project-title mb-0">
-          <b>Around Me</b>
+          <b>Around Me</b>{" "}
+          <a
+            className="ml-4 text-blue-400"
+            href="https://play.google.com/store/apps/details?id=com.yafimski.aroundme&hl=en"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faUpRightFromSquare} />
+          </a>
           <br />
           AI Travel app on Google Play
         </h1>
@@ -51,7 +69,7 @@ function AroundMe() {
           This became a 3-month project where I built an end-to-end app, backend
           and frontend with integration of Google Places and OpenAI APIs.
         </h2>
-        <div className="center text-md flex pt-16">
+        <div className="center text-md flex pt-4 sm:pt-16">
           <SimpleIcon
             href={"https://reactnative.dev/"}
             alt={"React Native"}

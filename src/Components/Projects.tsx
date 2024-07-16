@@ -2,7 +2,7 @@ function Projects() {
   const goToProject = (project: string) => {
     const yPos = document.getElementById(project)?.getBoundingClientRect().y;
     if (yPos) {
-      window.scrollTo({ top: yPos - 40, behavior: "smooth" });
+      window.scrollTo({ top: yPos - 50, behavior: "smooth" });
     }
   };
 

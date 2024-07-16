@@ -2,8 +2,15 @@ import SimpleIcon from "./SimpleIcon";
 
 function Romeo() {
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-3 col-start-2 p-8 text-center">
+    <div className="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:flex-col">
+      <div className="center relative col-span-5 col-start-2 aspect-video overflow-hidden border-0">
+        <iframe
+          className="romeo-video w-full"
+          title="Romeo"
+          src="../../public/MVP for Three.js IFC Viewer.mp4"
+        />
+      </div>
+      <div className="col-span-3 col-start-8 p-8 text-center">
         <h1 className="project-title">
           <b>Romeo</b>
           <br />
@@ -24,7 +31,7 @@ function Romeo() {
           </a>
           , which urged a more open approach to metadata in 3D environments.
         </p>
-        <div className="center text-md flex pt-16">
+        <div className="center text-md flex pt-4 sm:pt-16">
           <SimpleIcon
             href={"https://react.dev/"}
             alt={"React"}
@@ -46,13 +53,6 @@ function Romeo() {
             src={"../../public/firebase.png"}
           />
         </div>
-      </div>
-      <div className="center relative col-span-5 col-start-7 aspect-video overflow-hidden border-0">
-        <iframe
-          className="romeo-video h-full"
-          title="Romeo"
-          src="../../public/MVP for Three.js IFC Viewer.mp4"
-        />
       </div>
     </div>
   );

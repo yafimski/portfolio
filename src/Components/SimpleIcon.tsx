@@ -12,7 +12,11 @@ function SimpleIcon({ href, alt, src }: SimpleIconProps) {
       rel="noopener noreferrer"
       className="resource-img"
     >
-      <img alt={alt} src={src} className="pointer-events-none flex w-10" />
+      <img
+        alt={alt}
+        src={src}
+        className="pointer-events-none flex w-6 sm:w-10"
+      />
     </a>
   );
 }

@@ -33,11 +33,11 @@
   }
 
   .headline {
-    @apply inter select-none text-5xl font-thin tracking-wide text-white;
+    @apply inter text-headline select-none px-6 font-thin tracking-wide text-white;
   }
 
   .intro {
-    @apply inter mb-24 mt-8 flex w-full select-none flex-col text-2xl font-normal tracking-wider text-white transition-all duration-1000 ease-in-out;
+    @apply inter text-intro mb-24 mt-8 flex select-none flex-col font-normal tracking-wider text-white transition-all duration-1000 ease-in-out;
   }
 
   .intro:hover {
@@ -49,15 +49,15 @@
   }
 
   .intro-item1 {
-    transform: translateX(-8rem);
+    @apply -translate-x-[3rem] sm:-translate-x-[6rem] md:-translate-x-[7rem] xl:-translate-x-[8rem];
   }
 
   .intro-item2 {
-    transform: translateX(-3rem);
+    @apply -translate-x-0 sm:-translate-x-[2rem] md:-translate-x-[3rem] xl:-translate-x-[3rem];
   }
 
   .intro-item3 {
-    transform: translateX(8rem);
+    @apply translate-x-6 sm:translate-x-[6rem] md:translate-x-[5rem] xl:translate-x-[7rem] 2xl:translate-x-[8rem];
   }
 
   .intro:hover .intro-item1,
@@ -102,51 +102,16 @@
     background-position: right;
   }
 
-  .social-icon {
-    @apply cursor-pointer text-2xl;
-  }
-
-  .quote-wrapper {
-    @apply center relative mt-12 flex w-4/5 flex-col;
-  }
-
-  .quote {
-    @apply meri text-sm italic leading-6 tracking-wider text-white;
-    font-weight: 100;
-  }
-
-  .quote-person {
-    @apply text-xs italic leading-6 tracking-wider text-white;
-  }
-
-  .quote::before {
-    content: "''";
-    @apply mr-4 text-3xl font-bold leading-none text-white;
-  }
-
-  .quote::after {
-    content: "''";
-    @apply ml-4 text-3xl font-bold leading-none text-white;
-  }
-
-  .activate-quote {
-    @apply meri absolute bottom-8 right-0 z-10 text-sm font-light text-pink-500 transition duration-500 ease-in-out;
-  }
-
-  .activate-quote:hover {
-    @apply cursor-pointer font-bold text-white;
-  }
-
   .projects {
     @apply flex-1;
   }
 
   .projects-grid {
-    @apply mb-24 grid grid-cols-4 gap-16;
+    @apply mx-16 mb-24 grid gap-16 sm:mb-16 sm:grid-cols-4;
   }
 
   .project-box {
-    @apply center inter col-span-1 flex aspect-square h-36 overflow-hidden rounded-md bg-neutral-950 text-center text-xl tracking-widest text-white transition duration-500 ease-out;
+    @apply center inter text-intro col-span-1 flex aspect-square h-28 overflow-hidden rounded-md bg-neutral-950 text-center tracking-widest text-white transition duration-500 ease-out sm:h-36 2xl:text-xl;
     box-shadow: 0px 0px 24px 12px rgba(255, 255, 255, 0.3);
   }
 
@@ -157,6 +122,49 @@
 
   .project-shadow {
     box-shadow: 0px 0px 24px 12px rgba(255, 255, 255, 0.2);
+  }
+
+  .project-title {
+    @apply inter text-intro mb-8 tracking-wider sm:text-xl;
+  }
+
+  .project-description {
+    @apply meri text-content text-justify font-light md:mx-[10rem] lg:mx-0;
+  }
+
+  .social-icon {
+    @apply cursor-pointer text-xl sm:text-2xl;
+  }
+
+  .quote-wrapper {
+    @apply center relative mt-4 flex w-4/5 flex-col sm:mt-12;
+  }
+
+  .quote {
+    @apply meri text-xs italic leading-6 tracking-wider text-white sm:text-sm;
+    font-weight: 100;
+  }
+
+  .quote-person {
+    @apply absolute mt-8 text-xs italic leading-6 tracking-wider text-white sm:mt-0;
+  }
+
+  .quote::before {
+    content: "''";
+    @apply mr-4 text-2xl font-bold leading-none text-white sm:text-3xl;
+  }
+
+  .quote::after {
+    content: "''";
+    @apply ml-4 text-2xl font-bold leading-none text-white sm:text-3xl;
+  }
+
+  .activate-quote {
+    @apply meri bottom-0 right-0 z-10 text-[0.75rem] font-light text-pink-500 transition duration-500 ease-in-out sm:absolute sm:px-0 sm:text-sm;
+  }
+
+  .activate-quote:hover {
+    @apply cursor-pointer font-bold text-white;
   }
 
   .section-white,
@@ -181,16 +189,12 @@
     @apply scale-125 transition duration-500 ease-out;
   }
 
-  .project-title {
-    @apply inter mb-8 text-xl tracking-wider;
-  }
-
-  .project-description {
-    @apply meri text-justify text-base font-light;
-  }
-
   .inline-link {
     @apply text-blue-500;
+  }
+
+  .inline-link:hover {
+    @apply text-blue-300;
   }
 
   .me,
@@ -210,12 +214,12 @@
   }
 
   .flip-col {
-    @apply center my-auto w-full bg-transparent;
+    @apply center my-auto flex w-full bg-transparent pb-12;
     perspective: 1000px;
   }
 
   .quantum-card {
-    @apply center relative flex aspect-[9/14] transform flex-col justify-evenly rounded-3xl bg-gradient-to-b from-zinc-900 to-slate-800 text-center transition duration-700;
+    @apply center relative flex aspect-[9/14] w-1/2 transform flex-col justify-evenly rounded-3xl bg-gradient-to-b from-zinc-900 to-slate-800 text-center transition duration-700 sm:w-full md:my-8 md:w-1/5 lg:w-full;
     transform-style: preserve-3d;
     box-shadow: -2px 6px 16px 0px rgba(0, 0, 0, 0.5);
   }

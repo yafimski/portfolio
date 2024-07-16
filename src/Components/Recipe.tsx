@@ -1,11 +1,21 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SimpleIcon from "./SimpleIcon";
+import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 function Recipe() {
   return (
-    <div className="grid grid-cols-12">
+    <div className="flex flex-col lg:grid lg:grid-cols-12">
       <div className="col-span-4 col-start-2 p-8 text-center">
         <h1 className="project-title">
           <b>a4recipe</b>
+          <a
+            className="ml-4 text-blue-400"
+            href="https://yafimski.github.io/a4recipe/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faUpRightFromSquare} />
+          </a>
           <br />A visual recipe maker
         </h1>
         <h2 className="project-description">
@@ -48,7 +58,7 @@ function Recipe() {
           </a>{" "}
           for some amazing mouth-salivating image generation.
         </h2>
-        <div className="center text-md flex pt-16">
+        <div className="center text-md flex pt-4 sm:pt-16">
           <SimpleIcon
             href={"https://react.dev/"}
             alt={"React"}
@@ -76,7 +86,7 @@ function Recipe() {
           />
         </div>
       </div>
-      <div className="center relative col-span-6 col-start-7 m-auto aspect-square w-1/2 overflow-hidden rounded-3xl border-0">
+      <div className="center relative col-span-6 col-start-7 m-auto mb-8 aspect-square w-2/3 overflow-hidden rounded-3xl border-0 sm:w-1/2 md:mb-12 lg:mb-0">
         <img src="../../public/a4recipe.gif" alt="a4recipe" />
       </div>
     </div>

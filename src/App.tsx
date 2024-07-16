@@ -8,16 +8,20 @@ import Romeo from "./Components/Romeo";
 import Recipe from "./Components/Recipe";
 import AroundMe from "./Components/AroundMe";
 import Quantum from "./Components/Quantum";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import Work from "./Components/Work";
+import Study from "./Components/Study";
 
 function App() {
   return (
-    <div className="flex min-h-screen items-start justify-center overflow-auto bg-black">
+    <div className="relative flex min-h-screen items-center justify-center overflow-auto bg-black">
       <div className="center flex flex-col">
-        <section className="center flex flex-col pb-8">
+        <section className="center mb-24 flex flex-col">
           <Head />
           <Projects />
           <Quote />
-          <header className="center flex pt-16">
+          <footer className="center absolute top-0 m-8">
             <Social
               link="https://www.linkedin.com/in/yafimsimanovsky/"
               icon={faLinkedin}
@@ -26,7 +30,7 @@ function App() {
               link="https://github.com/yafimski/a4recipe"
               icon={faGithub}
             />
-          </header>
+          </footer>
         </section>
         <section id="recipe" className="center section-white">
           <Recipe />
@@ -40,6 +44,17 @@ function App() {
         <section id="romeo" className="center section-black">
           <Romeo />
         </section>
+      </div>
+      <div className="left-50 center absolute bottom-0 flex h-[5rem] w-full justify-around bg-neutral-50 text-center">
+        <Work />
+        <Study />
+      </div>
+      <div>
+        <FontAwesomeIcon
+          icon={faChevronUp}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-0 right-0 m-4 aspect-square cursor-pointer rounded-full bg-neutral-50 p-2 text-xl text-black hover:bg-neutral-950 hover:text-white"
+        />
       </div>
     </div>
   );
