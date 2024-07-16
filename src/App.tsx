@@ -10,8 +10,7 @@ import AroundMe from "./Components/AroundMe";
 import Quantum from "./Components/Quantum";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import Work from "./Components/Work";
-import Study from "./Components/Study";
+import Cred from "./Components/Cred";
 
 function App() {
   return (
@@ -44,10 +43,9 @@ function App() {
         <section id="romeo" className="center section-black">
           <Romeo />
         </section>
-      </div>
-      <div className="left-50 center absolute bottom-0 flex h-[5rem] w-full justify-around bg-neutral-50 text-center">
-        <Work />
-        <Study />
+        <section className="center flex w-full bg-neutral-50 sm:h-[5rem]">
+          <Cred />
+        </section>
       </div>
       <div>
         <FontAwesomeIcon

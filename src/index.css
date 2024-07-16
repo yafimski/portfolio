@@ -14,8 +14,6 @@
 }
 
 @layer components {
-  /* :root  */
-
   .inter {
     font-family: "Raleway";
   }
@@ -33,11 +31,11 @@
   }
 
   .headline {
-    @apply inter text-headline select-none px-6 font-thin tracking-wide text-white;
+    @apply inter select-none px-6 text-headline font-thin tracking-wide text-white;
   }
 
   .intro {
-    @apply inter text-intro mb-24 mt-8 flex select-none flex-col font-normal tracking-wider text-white transition-all duration-1000 ease-in-out;
+    @apply inter mb-24 mt-8 flex select-none flex-col text-intro font-normal tracking-wider text-white transition-all duration-1000 ease-in-out;
   }
 
   .intro:hover {
@@ -111,7 +109,7 @@
   }
 
   .project-box {
-    @apply center inter text-intro col-span-1 flex aspect-square h-28 overflow-hidden rounded-md bg-neutral-950 text-center tracking-widest text-white transition duration-500 ease-out sm:h-36 2xl:text-xl;
+    @apply center inter col-span-1 flex aspect-square h-28 overflow-hidden rounded-md bg-neutral-950 text-center text-intro tracking-widest text-white transition duration-500 ease-out sm:h-36 2xl:text-xl;
     box-shadow: 0px 0px 24px 12px rgba(255, 255, 255, 0.3);
   }
 
@@ -125,11 +123,11 @@
   }
 
   .project-title {
-    @apply inter text-intro mb-8 tracking-wider sm:text-xl;
+    @apply inter mb-8 text-intro tracking-wider sm:text-xl;
   }
 
   .project-description {
-    @apply meri text-content text-justify font-light md:mx-[10rem] lg:mx-0;
+    @apply meri text-justify text-content font-light md:mx-[10rem] lg:mx-0;
   }
 
   .social-icon {
@@ -169,8 +167,7 @@
 
   .section-white,
   .section-black {
-    display: flex;
-    min-height: 50rem;
+    @apply flex py-[2rem] sm:py-[4rem];
   }
 
   .section-white {
@@ -219,7 +216,7 @@
   }
 
   .quantum-card {
-    @apply center relative flex aspect-[9/14] w-1/2 transform flex-col justify-evenly rounded-3xl bg-gradient-to-b from-zinc-900 to-slate-800 text-center transition duration-700 sm:w-full md:my-8 md:w-1/5 lg:w-full;
+    @apply center relative flex aspect-[9/14] w-1/3 transform flex-col justify-evenly rounded-3xl bg-gradient-to-b from-zinc-900 to-slate-800 text-center transition duration-700 sm:w-full md:my-8 md:w-1/5 lg:w-full;
     transform-style: preserve-3d;
     box-shadow: -2px 6px 16px 0px rgba(0, 0, 0, 0.5);
   }
@@ -241,7 +238,7 @@
   }
 
   .quantum-card .quantum-text {
-    @apply px-8 text-base tracking-wider;
+    @apply px-4 text-content tracking-wider sm:px-8;
     font-family: "Urbanist";
   }
 
@@ -256,5 +253,21 @@
 
   .romeo-video {
     aspect-ratio: 1.77;
+  }
+
+  .cred-title {
+    @apply center inter flex p-4 px-8 text-center text-intro sm:p-2 sm:text-content md:mr-8;
+  }
+
+  .cred-cols {
+    @apply center flex flex-col sm:flex-row;
+  }
+
+  .cred-logos {
+    @apply center flex max-w-24 flex-col sm:max-w-60 sm:flex-row;
+  }
+
+  .cred-img {
+    @apply m-auto my-8 max-w-24 sm:my-0 md:mr-16;
   }
 }

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SimpleIcon from "./SimpleIcon";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { baseUrl } from "./Projects";
 
 function Recipe() {
   return (
@@ -62,32 +63,32 @@ function Recipe() {
           <SimpleIcon
             href={"https://react.dev/"}
             alt={"React"}
-            src={"../../public/react.webp"}
+            src={`${baseUrl}/react.webp`}
           />
           <SimpleIcon
             href={"https://vitejs.dev/"}
             alt={"Vite"}
-            src={"../../public/vite.svg"}
+            src={`${baseUrl}/vite.svg`}
           />
           <SimpleIcon
             href={"https://redux.js.org/"}
             alt={"Redux"}
-            src={"../../public/redux.png"}
+            src={`${baseUrl}/redux.png`}
           />
           <SimpleIcon
             href={"https://tailwindcss.com/"}
             alt={"Tailwind CSS"}
-            src={"../../public/tailwind.png"}
+            src={`${baseUrl}/tailwind.png`}
           />
           <SimpleIcon
             href={"https://vitest.dev/"}
             alt={"Vitest"}
-            src={"../../public/vitest.png"}
+            src={`${baseUrl}/vitest.png`}
           />
         </div>
       </div>
       <div className="center relative col-span-6 col-start-7 m-auto mb-8 aspect-square w-2/3 overflow-hidden rounded-3xl border-0 sm:w-1/2 md:mb-12 lg:mb-0">
-        <img src="../../public/a4recipe.gif" alt="a4recipe" />
+        <img src={`${baseUrl}/a4recipe.gif`} alt="a4recipe" />
       </div>
     </div>
   );

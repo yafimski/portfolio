@@ -1,3 +1,6 @@
+export const baseUrl =
+  process.env.NODE_ENV === "production" ? "/portfolio/" : "";
+
 function Projects() {
   const goToProject = (project: string) => {
     const yPos = document.getElementById(project)?.getBoundingClientRect().y;

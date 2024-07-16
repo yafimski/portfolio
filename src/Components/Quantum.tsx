@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SimpleIcon from "./SimpleIcon";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { baseUrl } from "./Projects";
 
 function Quantum() {
   return (
@@ -42,22 +43,22 @@ function Quantum() {
           <SimpleIcon
             href={"https://socket.io/"}
             alt={"Socket IO"}
-            src={"../../public/socketio.png"}
+            src={`${baseUrl}/socketio.png`}
           />
           <SimpleIcon
             href={"https://www.mongodb.com/"}
             alt={"Mongo DB"}
-            src={"../../public/mongodb.svg"}
+            src={`${baseUrl}/mongodb.svg`}
           />
           <SimpleIcon
             href={"https://react.dev/"}
             alt={"React"}
-            src={"../../public/react.webp"}
+            src={`${baseUrl}/react.webp`}
           />
           <SimpleIcon
             href={"https://nodejs.org/en"}
             alt={"Node JS"}
-            src={"../../public/node.png"}
+            src={`${baseUrl}/node.png`}
           />
         </div>
       </div>
@@ -73,10 +74,14 @@ function Quantum() {
         </div>
       </div>
       <div className="center col-span-2 col-start-9 mb-8 flex">
-        <iframe
+        <video
           className="quantum-video w-4/5 sm:w-full md:w-1/3 lg:w-full"
           title="Quantum"
-          src="../../public/Quantum Demo.mp4"
+          src={`${baseUrl}/Quantum Demo.mp4`}
+          autoPlay
+          loop
+          muted
+          controls
         />
       </div>
     </div>

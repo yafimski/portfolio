@@ -1,20 +1,21 @@
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SimpleIcon from "./SimpleIcon";
+import { baseUrl } from "./Projects";
 
 const images = [
-  "../../public/aroundme_1.png",
-  "../../public/aroundme_2.png",
-  "../../public/aroundme_3.png",
+  `${baseUrl}/aroundme_1.png`,
+  `${baseUrl}/aroundme_2.png`,
+  `${baseUrl}/aroundme_3.png`,
 ];
 
 function AroundMe() {
   return (
-    <div className="m-0 flex flex-col-reverse lg:grid lg:grid-cols-12 lg:flex-col">
-      <div className="center col-span-2 col-start-2 flex md:m-auto md:mb-16 md:w-1/3 lg:m-0 lg:w-full">
+    <div className="center m-0 flex flex-col-reverse lg:grid lg:grid-cols-12 lg:flex-col">
+      <div className="center col-span-2 col-start-2 w-4/5 md:m-auto md:mb-8 md:w-1/3 lg:m-0 lg:w-full">
         <img
           className="sm:rounded-xl"
-          src={"../../public/aroundme_appscreen.png"}
+          src={`${baseUrl}/aroundme_appscreen.png`}
           alt={"around me app"}
         />
       </div>
@@ -46,8 +47,8 @@ function AroundMe() {
         </h1>
         <div className="center my-3 flex">
           <img
-            className="w-24"
-            src={"../../public/aroundme_icon.png"}
+            className="w-16 sm:w-24"
+            src={`${baseUrl}/aroundme_icon.png`}
             alt={"around me app"}
           />
         </div>
@@ -69,28 +70,28 @@ function AroundMe() {
           This became a 3-month project where I built an end-to-end app, backend
           and frontend with integration of Google Places and OpenAI APIs.
         </h2>
-        <div className="center text-md flex pt-4 sm:pt-16">
+        <div className="center text-md flex pt-8 sm:pt-16">
           <SimpleIcon
             href={"https://reactnative.dev/"}
             alt={"React Native"}
-            src={"../../public/react_native.png"}
+            src={`${baseUrl}/react_native.png`}
           />
           <SimpleIcon
             href={"https://openai.com/"}
             alt={"OpenAI"}
-            src={"../../public/openai.webp"}
+            src={`${baseUrl}/openai.webp`}
           />
           <SimpleIcon
             href={"https://supabase.com/"}
             alt={"Supabase"}
-            src={"../../public/supabase.png"}
+            src={`${baseUrl}/supabase.png`}
           />
           <SimpleIcon
             href={
               "https://play.google.com/store/apps/details?id=com.yafimski.aroundme&hl=en"
             }
             alt={"Google Play"}
-            src={"../../public/google_play.png"}
+            src={`${baseUrl}/google_play.png`}
           />
         </div>
       </div>
