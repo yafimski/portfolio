@@ -31,11 +31,7 @@ function Quote() {
   }, []);
 
   useEffect(() => {
-    if (
-      showText !== null &&
-      quoteRef.current &&
-      content[content.length - 1] === "."
-    ) {
+    if (showText !== null && quoteRef.current && content.length % 80 === 0) {
       const height = quoteRef.current.getBoundingClientRect().height;
       window.scrollTo({
         top: 0 + height / 2,

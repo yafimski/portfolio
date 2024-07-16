@@ -49,7 +49,7 @@ function Romeo() {
       </div>
       <div className="center relative col-span-5 col-start-7 aspect-video overflow-hidden border-0">
         <iframe
-          className="h-full w-full"
+          className="romeo-video h-full"
           title="Romeo"
           src="../../public/MVP for Three.js IFC Viewer.mp4"
         />

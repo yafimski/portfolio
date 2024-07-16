@@ -3,7 +3,7 @@ import SimpleIcon from "./SimpleIcon";
 function Quantum() {
   return (
     <div className="grid grid-cols-12">
-      <div className="flip-col">
+      <div className="flip-col col-span-1 col-start-2">
         <div className="quantum-card">
           <div className="flip-card-front">
             <p className="quantum-text">How many eyes does a bee have?</p>
@@ -14,11 +14,11 @@ function Quantum() {
           </div>
         </div>
       </div>
-      <div className="center relative col-span-3 col-start-6 aspect-video overflow-hidden border-0">
+      <div className="col-span-2 col-start-5">
         <iframe
-          className="h-full w-1/2"
-          title="Romeo"
-          src="../../public/MVP for Three.js IFC Viewer.mp4"
+          className="quantum-video h-full"
+          title="Quantum"
+          src="../../public/Quantum Demo.mp4"
         />
       </div>
       <div className="col-span-3 col-start-9 p-8 text-center">

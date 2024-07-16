@@ -210,7 +210,7 @@
   }
 
   .flip-col {
-    @apply center col-span-2 col-start-2 m-auto w-44 bg-transparent;
+    @apply center my-auto w-full bg-transparent;
     perspective: 1000px;
   }
 
@@ -226,22 +226,31 @@
 
   .flip-card-front,
   .flip-card-back {
-    @apply center absolute flex h-full w-full flex-col text-white;
+    @apply center absolute flex h-full w-full flex-col text-center text-white;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
 
   .flip-card-back {
+    margin-left: 1rem;
     transform: rotateY(180deg);
   }
 
   .quantum-card .quantum-text {
-    @apply px-8 text-xl tracking-wider;
+    @apply px-8 text-base tracking-wider;
     font-family: "Urbanist";
   }
 
   .quantum-head {
     @apply text-[8rem] italic leading-none tracking-wider;
     font-family: "Amita";
+  }
+
+  .quantum-video {
+    aspect-ratio: 0.558;
+  }
+
+  .romeo-video {
+    aspect-ratio: 1.77;
   }
 }

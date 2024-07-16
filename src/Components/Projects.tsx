@@ -1,4 +1,11 @@
 function Projects() {
+  const goToProject = (project: string) => {
+    const yPos = document.getElementById(project)?.getBoundingClientRect().y;
+    if (yPos) {
+      window.scrollTo({ top: yPos - 40, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <div className="projects relative">
@@ -6,14 +13,14 @@ function Projects() {
           <div
             className="project-box"
             onKeyDown={() => {}}
-            // onClick={() => setCurrProject(1)}
+            onClick={() => goToProject("recipe")}
           >
             a4recipe
           </div>
           <div
             className="project-box"
             onKeyDown={() => {}}
-            // onClick={() => setCurrProject(1)}
+            onClick={() => goToProject("aroundme")}
           >
             Around
             <br />
@@ -22,16 +29,16 @@ function Projects() {
           <div
             className="project-box"
             onKeyDown={() => {}}
-            // onClick={() => setCurrProject(1)}
+            onClick={() => goToProject("quantum")}
           >
-            Romeo
+            Quantum
           </div>
           <div
             className="project-box"
             onKeyDown={() => {}}
-            // onClick={() => setCurrProject(1)}
+            onClick={() => goToProject("romeo")}
           >
-            Quantum
+            Romeo
           </div>
         </ul>
       </div>

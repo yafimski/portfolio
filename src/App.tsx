@@ -13,28 +13,31 @@ function App() {
   return (
     <div className="flex min-h-screen items-start justify-center overflow-auto bg-black">
       <div className="center flex flex-col">
-        <header className="fixed top-0 w-screen p-4 text-left">
-          <Social
-            link="https://www.linkedin.com/in/yafimsimanovsky/"
-            icon={faLinkedin}
-          />
-          <Social link="https://github.com/yafimski/a4recipe" icon={faGithub} />
-        </header>
-        <section className="pb-16">
+        <section className="center flex flex-col pb-8">
           <Head />
           <Projects />
           <Quote />
+          <header className="center flex pt-16">
+            <Social
+              link="https://www.linkedin.com/in/yafimsimanovsky/"
+              icon={faLinkedin}
+            />
+            <Social
+              link="https://github.com/yafimski/a4recipe"
+              icon={faGithub}
+            />
+          </header>
         </section>
-        <section className="center section-white">
+        <section id="recipe" className="center section-white">
           <Recipe />
         </section>
-        <section className="center section-black">
+        <section id="aroundme" className="center section-black">
           <AroundMe />
         </section>
-        <section className="center section-white">
+        <section id="quantum" className="center section-white">
           <Quantum />
         </section>
-        <section className="center section-black">
+        <section id="romeo" className="center section-black">
           <Romeo />
         </section>
       </div>
