@@ -5,7 +5,7 @@ import { baseUrl } from "./Projects";
 
 function Recipe() {
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-12">
+    <div className="center flex flex-col lg:grid lg:grid-cols-12">
       <div className="col-span-4 col-start-2 p-8 text-center">
         <h1 className="project-title">
           <b>a4recipe</b>
@@ -87,7 +87,7 @@ function Recipe() {
           />
         </div>
       </div>
-      <div className="center relative col-span-6 col-start-7 m-auto mb-8 aspect-square w-2/3 overflow-hidden rounded-3xl border-0 sm:w-1/2 md:mb-12 lg:mb-0">
+      <div className="center col-span-6 col-start-7 mb-8 flex aspect-square w-2/3 overflow-hidden rounded-3xl sm:w-1/2 md:mb-12 lg:mb-0 lg:w-2/3">
         <img src={`${baseUrl}/a4recipe.gif`} alt="a4recipe" />
       </div>
     </div>

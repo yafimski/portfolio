@@ -9,7 +9,11 @@
 
 @layer base {
   * {
-    @apply box-border;
+    @apply box-border select-none;
+  }
+
+  img {
+    @apply pointer-events-none;
   }
 }
 
