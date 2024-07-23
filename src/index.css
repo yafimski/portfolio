@@ -242,12 +242,12 @@
   }
 
   .quantum-card .quantum-text {
-    @apply px-4 text-content tracking-wider sm:px-8;
+    @apply px-4 text-content tracking-wider sm:px-8 lg:text-xs xl:text-sm;
     font-family: "Urbanist";
   }
 
   .quantum-head {
-    @apply text-[8rem] italic leading-none tracking-wider;
+    @apply text-symbol italic leading-none tracking-wider;
     font-family: "Amita";
   }
 
