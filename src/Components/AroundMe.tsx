@@ -12,11 +12,22 @@ const images = [
 function AroundMe() {
   return (
     <div className="center m-0 flex flex-col-reverse lg:grid lg:grid-cols-12 lg:flex-col">
-      <div className="center col-span-2 col-start-2 w-4/5 md:m-auto md:mb-8 md:w-1/3 lg:m-0 lg:w-full">
+      {/* <div className="center col-span-2 col-start-2 w-4/5 md:m-auto md:mb-8 md:w-1/3 lg:m-0 lg:w-full">
         <img
           className="sm:rounded-xl"
           src={`${baseUrl}/aroundme_appscreen.png`}
           alt={"around me app"}
+        />
+      </div> */}
+      <div className="center col-span-2 col-start-2 mb-8 flex">
+        <video
+          className="screencast-video w-4/5 sm:w-full md:w-1/3 lg:w-full"
+          title="AroundMe"
+          src={`${baseUrl}/AroundMe Demo.mp4`}
+          autoPlay
+          loop
+          muted
+          controls
         />
       </div>
       <div className="center relative col-span-5 col-start-4 m-auto overflow-hidden border-0">

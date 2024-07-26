@@ -75,7 +75,7 @@ function Quantum() {
       </div>
       <div className="center col-span-2 col-start-9 mb-8 flex">
         <video
-          className="quantum-video w-4/5 sm:w-full md:w-1/3 lg:w-full"
+          className="screencast-video w-4/5 sm:w-full md:w-1/3 lg:w-full"
           title="Quantum"
           src={`${baseUrl}/Quantum Demo.mp4`}
           autoPlay
