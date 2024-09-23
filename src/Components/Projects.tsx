@@ -16,7 +16,7 @@ function Projects() {
           <div
             className="project-box"
             onKeyDown={() => {}}
-            onClick={() => goToProject("recipe")}
+            onClick={() => goToProject("a4recipe")}
           >
             <img
               className="project-box-img"
@@ -52,6 +52,17 @@ function Projects() {
             onClick={() => goToProject("romeo")}
           >
             <img className="project-box-img" src="romeo_box.webp" alt="romeo" />
+          </div>
+          <div
+            className="project-box"
+            onKeyDown={() => {}}
+            onClick={() => goToProject("songnation")}
+          >
+            <img
+              className="project-box-img"
+              src="songnation_box.webp"
+              alt="songnation"
+            />
           </div>
         </ul>
       </div>

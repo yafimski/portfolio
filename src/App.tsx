@@ -11,6 +11,7 @@ import Quantum from "./Components/Quantum";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Cred from "./Components/Cred";
+import Songnation from "./Components/Songnation";
 
 function App() {
   return (
@@ -31,7 +32,8 @@ function App() {
             />
           </footer>
         </section>
-        <section id="recipe" className="center section-white">
+
+        <section id="a4recipe" className="center section-white">
           <Recipe />
         </section>
         <section id="aroundme" className="center section-black">
@@ -42,6 +44,9 @@ function App() {
         </section>
         <section id="romeo" className="center section-black">
           <Romeo />
+        </section>
+        <section id="songnation" className="center section-white">
+          <Songnation />
         </section>
         <section className="center flex w-full bg-neutral-50 sm:h-[5rem]">
           <Cred />
