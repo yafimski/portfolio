@@ -11,7 +11,7 @@ function Songnation() {
           <b>Songnation</b>
           <a
             className="ml-4 text-blue-400"
-            href="https://quantum-trivia.online/"
+            href="https://songnation.live/"
             target="_blank"
             rel="noopener noreferrer"
           >
