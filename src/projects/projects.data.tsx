@@ -255,7 +255,7 @@ export const PROJECTS: Project[] = [
         SoundAround is a collaborative map of public Sounds. Upload and Share.
       </>
     ),
-    galleryImages: [a("soundaround_screenshot.png")],
+    galleryImages: [a("soundaround_screenshot.png"),a("soundaround_screenshot_2.png")],
   },
 ];
 
