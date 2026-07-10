@@ -123,7 +123,7 @@ function App() {
       <img
         src="/ys_logo.webp"
         alt="YS"
-        className="ys-logo pointer-events-none fixed top-6 left-6 z-40 h-48 sm:top-8 sm:left-8"
+        className="ys-logo pointer-events-none fixed top-4 left-4 z-40 h-24 sm:top-8 sm:left-8 sm:h-48"
       />
 
       <button

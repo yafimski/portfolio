@@ -26,16 +26,19 @@ export const CAMERA_RIGHT = new Vector3()
   .crossVectors(cameraForward, new Vector3(0, 1, 0))
   .normalize();
 
-/** How far the cube sits back from the origin (away from camera). */
-export const CUBE_BACK = 1.5;
-
-export const CUBE_OFFSET = new Vector3(
+/** Unit vector along the floor plane, away from camera (into the scene). */
+export const FLOOR_DEPTH = new Vector3(
   -CAMERA_DIRECTION.x,
   0,
   -CAMERA_DIRECTION.z,
-)
-  .normalize()
-  .multiplyScalar(CUBE_BACK);
+).normalize();
+
+export type CubeArrangement = "horizontal" | "vertical";
+
+/** How far the cube sits back from the origin (away from camera). */
+export const CUBE_BACK = 1.5;
+
+export const CUBE_OFFSET = FLOOR_DEPTH.clone().multiplyScalar(CUBE_BACK);
 
 export const EXPANDED_OFFSET = CAMERA_DIRECTION
   .clone()
@@ -45,16 +48,47 @@ export const CUBE_COUNT = 2;
 /** Center-to-center distance between adjacent cubes. */
 export const CUBE_SPACING = CUBE_SIZE * 2.4;
 
+/** Vertical separation between stacked cubes on mobile (fraction of lateral offset). */
+const MOBILE_Y_SCALE = 0.75;
+
 export function getCubeLateralOffset(
   cubeIndex: number,
   cubeCount = CUBE_COUNT,
+  spacingScale = 1,
 ) {
-  return (cubeIndex - (cubeCount - 1) / 2) * CUBE_SPACING;
+  return (cubeIndex - (cubeCount - 1) / 2) * CUBE_SPACING * spacingScale;
 }
 
-export function getCubeBaseOffset(cubeIndex: number) {
-  const lateral = getCubeLateralOffset(cubeIndex);
-  return CUBE_OFFSET.clone().add(
-    CAMERA_RIGHT.clone().multiplyScalar(lateral),
-  );
+export function getCubeBaseOffset(
+  cubeIndex: number,
+  spacingScale = 1,
+  arrangement: CubeArrangement = "horizontal",
+  cubeBackScale = 1,
+) {
+  const lateral = getCubeLateralOffset(cubeIndex, CUBE_COUNT, spacingScale);
+  const base = FLOOR_DEPTH.clone().multiplyScalar(CUBE_BACK * cubeBackScale);
+
+  if (arrangement === "vertical") {
+    const offset = base;
+    offset.y += lateral * MOBILE_Y_SCALE;
+    return offset;
+  }
+
+  return base.add(CAMERA_RIGHT.clone().multiplyScalar(lateral));
+}
+
+export function getCameraPosition(distanceScale = 1): [number, number, number] {
+  const offset = cameraPosition
+    .clone()
+    .sub(CAMERA_TARGET)
+    .multiplyScalar(distanceScale);
+  return [
+    CAMERA_TARGET.x + offset.x,
+    CAMERA_TARGET.y + offset.y,
+    CAMERA_TARGET.z + offset.z,
+  ];
+}
+
+export function getExpandedOffset(push = EXPANDED_PUSH) {
+  return CAMERA_DIRECTION.clone().multiplyScalar(push);
 }

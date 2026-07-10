@@ -1,12 +1,9 @@
-import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useLayoutEffect, useRef } from "react";
 import { Quaternion, Vector3 } from "three";
 import { FACE_CONFIGS } from "./faceConfig";
-import {
-  CAMERA_DIRECTION,
-  EXPANDED_OFFSET,
-  EXPANDED_SCALE,
-} from "./sceneConfig";
+import { CAMERA_DIRECTION, getExpandedOffset } from "./sceneConfig";
+import { getSceneLayout, type SceneLayout } from "./sceneLayout";
 
 export { IDLE_Y, EXPANDED_SCALE } from "./sceneConfig";
 
@@ -25,6 +22,13 @@ type AnimatorState =
   | "switching";
 
 export function useCubeAnimator() {
+  const { size } = useThree();
+  const layoutRef = useRef<SceneLayout>(getSceneLayout(size.width, size.height));
+
+  useLayoutEffect(() => {
+    layoutRef.current = getSceneLayout(size.width, size.height);
+  }, [size.width, size.height]);
+
   const stateRef = useRef<AnimatorState>("idle");
   const progressRef = useRef(0);
   const targetQuatRef = useRef(new Quaternion());
@@ -63,10 +67,11 @@ export function useCubeAnimator() {
       );
     startQuatRef.current.copy(currentQuat);
     idleQuatRef.current.copy(currentQuat);
+    const layout = layoutRef.current;
     startScaleRef.current = currentScaleRef.current;
-    targetScaleRef.current = EXPANDED_SCALE;
+    targetScaleRef.current = layout.expandedScale;
     startPosRef.current.copy(currentPosRef.current);
-    targetPosRef.current.copy(EXPANDED_OFFSET);
+    targetPosRef.current.copy(getExpandedOffset(layout.expandedPush));
     activeFaceRef.current = faceIndex;
     progressRef.current = 0;
     stateRef.current = "expanding";
@@ -125,10 +130,11 @@ export function useCubeAnimator() {
 
     startQuatRef.current.copy(currentQuatRef.current);
     targetQuatRef.current.copy(newTarget);
+    const layout = layoutRef.current;
     startScaleRef.current = currentScaleRef.current;
-    targetScaleRef.current = EXPANDED_SCALE;
+    targetScaleRef.current = layout.expandedScale;
     startPosRef.current.copy(currentPosRef.current);
-    targetPosRef.current.copy(EXPANDED_OFFSET);
+    targetPosRef.current.copy(getExpandedOffset(layout.expandedPush));
     activeFaceRef.current = faceIndex;
     progressRef.current = 0;
     stateRef.current = "switching";

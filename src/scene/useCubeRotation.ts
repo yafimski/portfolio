@@ -243,7 +243,7 @@ export function useCubeRotation({
     groupRef.current.scale.setScalar(scale);
     groupRef.current.position.set(
       baseOffset.x + push.x,
-      CUBE_Y + bobOffset + push.y,
+      CUBE_Y + bobOffset + push.y + baseOffset.y,
       baseOffset.z + push.z,
     );
 

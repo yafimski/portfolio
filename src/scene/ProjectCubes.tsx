@@ -1,7 +1,9 @@
+import { useThree } from "@react-three/fiber";
 import {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
   type RefObject,
@@ -10,6 +12,7 @@ import { CUBE_COUNT, getCubeFaces } from "../projects/projects.data";
 import type { CubeFaceData, Project } from "../projects/types";
 import { ProjectCube, type ProjectCubeHandle } from "./ProjectCube";
 import { getCubeBaseOffset } from "./sceneConfig";
+import { getSceneLayout } from "./sceneLayout";
 
 export type ProjectCubesHandle = {
   collapse: () => void;
@@ -35,11 +38,18 @@ export const ProjectCubes = forwardRef<ProjectCubesHandle, ProjectCubesProps>(
     const isCrossCubeTransitioningRef = useRef(false);
     const overlayOpacityRef = useRef(0);
     const [lockedCubeIndex, setLockedCubeIndex] = useState<number | null>(null);
-    const baseOffsetsRef = useRef(
-      Array.from({ length: CUBE_COUNT }, (_, cubeIndex) =>
-        getCubeBaseOffset(cubeIndex),
-      ),
-    );
+    const { size } = useThree();
+    const baseOffsets = useMemo(() => {
+      const layout = getSceneLayout(size.width, size.height);
+      return Array.from({ length: CUBE_COUNT }, (_, cubeIndex) =>
+        getCubeBaseOffset(
+          cubeIndex,
+          layout.spacingScale,
+          layout.arrangement,
+          layout.cubeBackScale,
+        ),
+      );
+    }, [size.width, size.height]);
     const facesRef = useRef<CubeFaceData[][]>(
       Array.from({ length: CUBE_COUNT }, (_, cubeIndex) =>
         getCubeFaces(cubeIndex),
@@ -186,7 +196,7 @@ export const ProjectCubes = forwardRef<ProjectCubesHandle, ProjectCubesProps>(
             }}
             cubeIndex={cubeIndex}
             faces={facesRef.current[cubeIndex]}
-            baseOffset={baseOffsetsRef.current[cubeIndex]}
+            baseOffset={baseOffsets[cubeIndex]}
             isLocked={lockedCubeIndex !== null && lockedCubeIndex !== cubeIndex}
             onProjectExpand={(project) => handleCubeExpand(cubeIndex, project)}
             onProjectCollapse={handleCubeCollapse}
