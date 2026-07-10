@@ -154,6 +154,7 @@ export const PROJECTS: Project[] = [
     id: "canisolar",
     cubeIndex: 1,
     faceIndex: 0,
+    thumbnail: a("canisolar.webp"),
     title: "Canisolar",
     subtitle: "Calculate your solar panel ROI",
     liveUrl: "https://canisolar.netlify.app/",
@@ -165,12 +166,13 @@ export const PROJECTS: Project[] = [
         It allows you to input your energy consumption and solar panel system size, and it will calculate the ROI of the system in a few seconds.
       </>
     ),
-    galleryImages: [a("canisolar.png")],
+    galleryImages: [a("canisolar_screenshot.png")],
   },
   {
     id: "shouldisignit",
     cubeIndex: 1,
     faceIndex: 1,
+    thumbnail: a("shouldisignit.webp"),
     title: "Should I Sign It",
     subtitle: "AI-powered contract signing assistant",
     liveUrl: "https://www.shouldisignit.com/",
@@ -188,6 +190,7 @@ export const PROJECTS: Project[] = [
     id: "salkal",
     cubeIndex: 1,
     faceIndex: 2,
+    thumbnail: a("salkal.webp"),
     title: "Salkal סל קל",
     subtitle: "A price-comparison tool for Israeli groceries",
     liveUrl: "https://salkal.netlify.app/",
@@ -200,11 +203,13 @@ export const PROJECTS: Project[] = [
       </>
     ),
     galleryImages: [a("salkal_logo.png"), a("salkal_receipt.png")],
+    galleryVariant: "unified",
   },
   {
     id: "pele",
     cubeIndex: 1,
     faceIndex: 3,
+    thumbnail: a("pele.webp"),
     title: "Pele AI Assistant",
     subtitle: "Your personal AI assistant for Autodesk Revit",
     
@@ -216,12 +221,13 @@ export const PROJECTS: Project[] = [
         It allows you to ask questions about your Revit project as a sort of command-line interface (the first and arguable best option for ai-commands in Revit, about 2 years(!) before autodesk themselves made a similar product, and way before anyone else could make a similar product that is publicly available), and it will use AI to answer your questions, and help you with your project.
       </>
     ),
-    galleryImages: [a("pele.png")],
+    media: { type: "youtube", videoId: "LyeaG3tTstM" },
   },
   {
     id: "qraze",
     cubeIndex: 1,
     faceIndex: 4,
+    thumbnail: a("qraze.webp"),
     title: "QRaze",
     subtitle: "Navigate the Grid. Beat the Clock.",
     liveUrl:"https://www.qraze.online/",
@@ -233,13 +239,14 @@ export const PROJECTS: Project[] = [
     media: {
       type: "video",
       src: a("QRaze_short_demo.mp4"),
-      aspect: "landscape",
+      aspect: "portrait",
     },
   },
   {
     id: "soundaround",
-    cubeIndex: 1,
+    cubeIndex: 0,
     faceIndex: 5,
+    thumbnail: a("soundaround.webp"),
     title: "SoundAround",
     subtitle: "Mapping the Sounds of the World",
     liveUrl:"https://soundaroundmap.online/",
@@ -248,6 +255,7 @@ export const PROJECTS: Project[] = [
         SoundAround is a collaborative map of public Sounds. Upload and Share.
       </>
     ),
+    galleryImages: [a("soundaround_screenshot.png")],
   },
 ];
 
@@ -263,7 +271,7 @@ export const PLACEHOLDER_FACES: CubeFaceData[] = [
     placeholderLabel: "Supermark-It (soon)",
   },
   {
-    cubeIndex: 0,
+    cubeIndex: 1,
     faceIndex: 5,
     thumbnail: "",
     project: null,

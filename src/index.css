@@ -98,6 +98,14 @@
     @apply inter shrink-0 border-b border-white/10 px-6 pt-6 pb-4;
   }
 
+  .face-panel-header-row {
+    @apply flex items-center gap-4;
+  }
+
+  .face-panel-thumb {
+    @apply h-16 w-16 shrink-0 rounded-lg object-cover;
+  }
+
   .face-panel-title {
     @apply text-intro tracking-wider select-none;
   }
@@ -114,14 +122,16 @@
     @apply inter text-justify text-content leading-relaxed font-normal text-neutral-200 select-none;
   }
 
-  .face-panel-video-portrait {
-    @apply mx-auto w-full max-w-xs rounded-xl;
-    aspect-ratio: 0.558;
+  .face-panel-video {
+    @apply w-full rounded-xl bg-black object-contain;
   }
 
-  .face-panel-video-landscape {
-    @apply w-full rounded-xl;
-    aspect-ratio: 1.77;
+  .face-panel-video-portrait {
+    @apply mx-auto max-w-xs;
+  }
+
+  .face-panel-youtube {
+    @apply aspect-video w-full rounded-xl border-0;
   }
 
   .face-panel-gif {
@@ -129,11 +139,19 @@
   }
 
   .face-panel-gallery {
-    @apply flex flex-wrap justify-center gap-3;
+    @apply flex w-full flex-col gap-3;
   }
 
   .face-panel-gallery img {
-    @apply max-h-48 rounded-lg object-cover;
+    @apply w-full rounded-lg object-contain;
+  }
+
+  .face-panel-gallery--unified {
+    @apply h-52 flex-row items-center gap-0 overflow-hidden rounded-lg bg-white p-3;
+  }
+
+  .face-panel-gallery--unified img {
+    @apply h-full min-h-0 w-0 flex-1 rounded-none object-contain;
   }
 
   .overlay-panel {
@@ -177,6 +195,10 @@
 
   .overlay-gif {
     @apply mx-auto w-full max-w-sm rounded-xl;
+  }
+
+  .overlay-youtube {
+    @apply aspect-video w-full rounded-xl border-0;
   }
 
   .overlay-gallery {

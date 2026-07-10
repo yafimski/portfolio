@@ -1,4 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { useFrame } from "@react-three/fiber";
 import { Group } from "three";
 import { CubeFace } from "./CubeFace";
 import { FACE_CONFIGS } from "./faceConfig";
@@ -22,6 +23,11 @@ export const ProjectCube = forwardRef<ProjectCubeHandle, ProjectCubeProps>(
   ) {
     const groupRef = useRef<Group>(null);
     const [hoveredFace, setHoveredFace] = useState<number | null>(null);
+    const pendingNavigateFaceRef = useRef<number | null>(null);
+    const pendingExpandFaceRef = useRef<{
+      faceIndex: number;
+      onComplete?: () => void;
+    } | null>(null);
     const animator = useCubeAnimator();
 
     const {
@@ -40,6 +46,8 @@ export const ProjectCube = forwardRef<ProjectCubeHandle, ProjectCubeProps>(
 
     useImperativeHandle(ref, () => ({
       collapse: (onComplete?: () => void) => {
+        pendingNavigateFaceRef.current = null;
+        pendingExpandFaceRef.current = null;
         animator.collapse(() => {
           if (onComplete) {
             onComplete();
@@ -50,6 +58,8 @@ export const ProjectCube = forwardRef<ProjectCubeHandle, ProjectCubeProps>(
       },
       resetRotation,
       goHome: () => {
+        pendingNavigateFaceRef.current = null;
+        pendingExpandFaceRef.current = null;
         if (animator.isInteracting()) {
           animator.collapse(() => {
             onProjectCollapse();
@@ -60,26 +70,73 @@ export const ProjectCube = forwardRef<ProjectCubeHandle, ProjectCubeProps>(
       },
       navigateToFace: (faceIndex: number) => {
         const state = animator.getState();
-        if (state !== "expanded" && state !== "switching") return;
+        if (state !== "expanded" && state !== "switching") {
+          pendingNavigateFaceRef.current = faceIndex;
+          return false;
+        }
 
         const face = faces.find((f) => f.faceIndex === faceIndex);
-        if (!face?.project) return;
+        if (!face?.project) return false;
 
+        pendingNavigateFaceRef.current = null;
         animator.switchFace(faceIndex);
         onProjectExpand(face.project);
+        return true;
       },
-      expandFace: (faceIndex: number) => {
-        if (!groupRef.current || animator.isInteracting()) return;
+      expandFace: (faceIndex: number, onComplete?: () => void) => {
+        if (!groupRef.current || animator.isInteracting()) {
+          pendingExpandFaceRef.current = { faceIndex, onComplete };
+          return;
+        }
 
         const face = faces.find((f) => f.faceIndex === faceIndex);
         if (!face?.project) return;
 
+        pendingExpandFaceRef.current = null;
         clearMomentum();
         onProjectExpand(face.project);
-        animator.expand(faceIndex, groupRef.current.quaternion.clone());
+        animator.expand(
+          faceIndex,
+          groupRef.current.quaternion.clone(),
+          onComplete,
+        );
       },
       overlayOpacityRef: animator.overlayOpacityRef,
     }));
+
+    useFrame(() => {
+      const pendingFace = pendingNavigateFaceRef.current;
+      if (pendingFace !== null) {
+        const state = animator.getState();
+        if (state === "expanded" || state === "switching") {
+          const face = faces.find((f) => f.faceIndex === pendingFace);
+          if (face?.project) {
+            pendingNavigateFaceRef.current = null;
+            animator.switchFace(pendingFace);
+            onProjectExpand(face.project);
+          }
+        }
+      }
+
+      const pendingExpand = pendingExpandFaceRef.current;
+      if (
+        pendingExpand &&
+        groupRef.current &&
+        !animator.isInteracting()
+      ) {
+        const face = faces.find((f) => f.faceIndex === pendingExpand.faceIndex);
+        if (face?.project) {
+          pendingExpandFaceRef.current = null;
+          clearMomentum();
+          onProjectExpand(face.project);
+          animator.expand(
+            pendingExpand.faceIndex,
+            groupRef.current.quaternion.clone(),
+            pendingExpand.onComplete,
+          );
+        }
+      }
+    });
 
     const handleFaceClick = (faceIndex: number) => {
       if (isLocked || wasDragged() || animator.isInteracting()) {

@@ -74,7 +74,19 @@ export function useCubeAnimator() {
   };
 
   const collapse = (onComplete?: () => void) => {
-    if (stateRef.current === "idle" || stateRef.current === "collapsing") {
+    if (stateRef.current === "idle") {
+      onComplete?.();
+      return;
+    }
+
+    if (stateRef.current === "collapsing") {
+      if (onComplete) {
+        const previous = onCollapseCompleteRef.current;
+        onCollapseCompleteRef.current = () => {
+          previous?.();
+          onComplete();
+        };
+      }
       return;
     }
 

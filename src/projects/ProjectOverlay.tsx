@@ -73,6 +73,16 @@ export function ProjectOverlay({
             />
           )}
 
+          {project.media?.type === "youtube" && (
+            <iframe
+              className="overlay-youtube"
+              src={`https://www.youtube.com/embed/${project.media.videoId}`}
+              title={project.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          )}
+
           {project.media?.type === "gif" && (
             <img
               className="overlay-gif"

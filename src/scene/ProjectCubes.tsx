@@ -29,6 +29,10 @@ export const ProjectCubes = forwardRef<ProjectCubesHandle, ProjectCubesProps>(
       Array.from({ length: CUBE_COUNT }, () => null),
     );
     const activeCubeRef = useRef<number | null>(null);
+    const overlayPinnedRef = useRef(false);
+    const navigationGenerationRef = useRef(0);
+    const pendingNavigationRef = useRef<Project | null>(null);
+    const isCrossCubeTransitioningRef = useRef(false);
     const overlayOpacityRef = useRef(0);
     const [lockedCubeIndex, setLockedCubeIndex] = useState<number | null>(null);
     const baseOffsetsRef = useRef(
@@ -46,11 +50,15 @@ export const ProjectCubes = forwardRef<ProjectCubesHandle, ProjectCubesProps>(
       let frame = 0;
 
       const tick = () => {
-        const active = activeCubeRef.current;
-        overlayOpacityRef.current =
-          active === null
-            ? 0
-            : (cubeRefs.current[active]?.overlayOpacityRef.current ?? 0);
+        if (overlayPinnedRef.current) {
+          overlayOpacityRef.current = 1;
+        } else {
+          const active = activeCubeRef.current;
+          overlayOpacityRef.current =
+            active === null
+              ? 0
+              : (cubeRefs.current[active]?.overlayOpacityRef.current ?? 0);
+        }
         frame = requestAnimationFrame(tick);
       };
 
@@ -65,13 +73,86 @@ export const ProjectCubes = forwardRef<ProjectCubesHandle, ProjectCubesProps>(
     };
 
     const handleCubeCollapse = () => {
+      if (overlayPinnedRef.current || isCrossCubeTransitioningRef.current) {
+        return;
+      }
       activeCubeRef.current = null;
       setLockedCubeIndex(null);
       onProjectCollapse();
     };
 
+    const navigateLogicRef = useRef<(project: Project) => void>(() => {});
+    navigateLogicRef.current = (project: Project) => {
+      const active = activeCubeRef.current;
+      const targetCube = project.cubeIndex;
+      const target = cubeRefs.current[targetCube];
+      if (!target) return;
+
+      if (active === targetCube) {
+        isCrossCubeTransitioningRef.current = false;
+        overlayPinnedRef.current = true;
+        target.navigateToFace(project.faceIndex);
+        return;
+      }
+
+      if (active !== null) {
+        overlayPinnedRef.current = true;
+
+        if (isCrossCubeTransitioningRef.current) {
+          return;
+        }
+
+        isCrossCubeTransitioningRef.current = true;
+        const generation = navigationGenerationRef.current;
+        const collapsingCube = active;
+
+        cubeRefs.current[collapsingCube]?.collapse(() => {
+          const latest = pendingNavigationRef.current;
+
+          if (generation !== navigationGenerationRef.current) {
+            isCrossCubeTransitioningRef.current = false;
+            if (latest) navigateLogicRef.current(latest);
+            return;
+          }
+
+          if (!latest) {
+            isCrossCubeTransitioningRef.current = false;
+            overlayPinnedRef.current = false;
+            return;
+          }
+
+          activeCubeRef.current = latest.cubeIndex;
+          setLockedCubeIndex(latest.cubeIndex);
+          const expandTarget = cubeRefs.current[latest.cubeIndex];
+          if (!expandTarget) {
+            isCrossCubeTransitioningRef.current = false;
+            overlayPinnedRef.current = false;
+            return;
+          }
+
+          expandTarget.expandFace(latest.faceIndex, () => {
+            if (generation !== navigationGenerationRef.current) {
+              isCrossCubeTransitioningRef.current = false;
+              const newer = pendingNavigationRef.current;
+              if (newer) navigateLogicRef.current(newer);
+              return;
+            }
+
+            overlayPinnedRef.current = false;
+            isCrossCubeTransitioningRef.current = false;
+          });
+        });
+        return;
+      }
+
+      target.expandFace(project.faceIndex);
+    };
+
     useImperativeHandle(ref, () => ({
       collapse: () => {
+        overlayPinnedRef.current = false;
+        isCrossCubeTransitioningRef.current = false;
+        pendingNavigationRef.current = null;
         const active = activeCubeRef.current;
         if (active === null) return;
         cubeRefs.current[active]?.collapse();
@@ -88,27 +169,9 @@ export const ProjectCubes = forwardRef<ProjectCubesHandle, ProjectCubesProps>(
         }
       },
       navigateToProject: (project: Project) => {
-        const active = activeCubeRef.current;
-        const targetCube = project.cubeIndex;
-        const target = cubeRefs.current[targetCube];
-        if (!target) return;
-
-        if (active === targetCube) {
-          target.navigateToFace(project.faceIndex);
-          onProjectExpand(project);
-          return;
-        }
-
-        if (active !== null) {
-          cubeRefs.current[active]?.collapse(() => {
-            activeCubeRef.current = null;
-            setLockedCubeIndex(null);
-            target.expandFace(project.faceIndex);
-          });
-          return;
-        }
-
-        target.expandFace(project.faceIndex);
+        navigationGenerationRef.current += 1;
+        pendingNavigationRef.current = project;
+        navigateLogicRef.current(project);
       },
       overlayOpacityRef,
     }));

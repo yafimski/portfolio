@@ -6,8 +6,8 @@ export type ProjectCubeHandle = {
   collapse: (onComplete?: () => void) => void;
   resetRotation: () => void;
   goHome: () => void;
-  navigateToFace: (faceIndex: number) => void;
-  expandFace: (faceIndex: number) => void;
+  navigateToFace: (faceIndex: number) => boolean;
+  expandFace: (faceIndex: number, onComplete?: () => void) => void;
   overlayOpacityRef: RefObject<number>;
 };
 

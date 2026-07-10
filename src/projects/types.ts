@@ -3,7 +3,8 @@ import type { ReactNode } from "react";
 export type ProjectMedia =
   | { type: "video"; src: string; aspect?: "portrait" | "landscape" }
   | { type: "gif"; src: string }
-  | { type: "images"; srcs: string[] };
+  | { type: "images"; srcs: string[] }
+  | { type: "youtube"; videoId: string };
 
 export type Project = {
   id: string;
@@ -16,6 +17,7 @@ export type Project = {
   liveUrl?: string;
   media?: ProjectMedia;
   galleryImages?: string[];
+  galleryVariant?: "unified";
 };
 
 export type CubeFaceData = {

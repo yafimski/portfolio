@@ -13,6 +13,8 @@ import "./index.css";
 function App() {
   const cubeRef = useRef<ProjectCubesHandle>(null);
   const [expandedProject, setExpandedProject] = useState<Project | null>(null);
+  const expandedProjectRef = useRef<Project | null>(null);
+  expandedProjectRef.current = expandedProject;
 
   const handleProjectExpand = useCallback((project: Project) => {
     setExpandedProject(project);
@@ -30,24 +32,23 @@ function App() {
     cubeRef.current?.goHome();
   }, []);
 
-  const handleNavigateProject = useCallback(
-    (direction: -1 | 1) => {
-      if (!expandedProject) return;
+  const handleNavigateProject = useCallback((direction: -1 | 1) => {
+    const current = expandedProjectRef.current;
+    if (!current || PROJECTS.length === 0) return;
 
-      const currentIndex = PROJECTS.findIndex(
-        (project) => project.id === expandedProject.id,
-      );
-      if (currentIndex === -1) return;
+    const currentIndex = PROJECTS.findIndex(
+      (project) => project.id === current.id,
+    );
+    if (currentIndex === -1) return;
 
-      const nextIndex =
-        (currentIndex + direction + PROJECTS.length) % PROJECTS.length;
-      const nextProject = PROJECTS[nextIndex];
+    const nextIndex =
+      (currentIndex + direction + PROJECTS.length) % PROJECTS.length;
+    const nextProject = PROJECTS[nextIndex];
+    if (!nextProject) return;
 
-      cubeRef.current?.navigateToProject(nextProject);
-      setExpandedProject(nextProject);
-    },
-    [expandedProject],
-  );
+    cubeRef.current?.navigateToProject(nextProject);
+    setExpandedProject(nextProject);
+  }, []);
 
   const resetBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -153,7 +154,6 @@ function App() {
             aria-hidden="true"
           />
           <ScreenProjectPanel
-            key={expandedProject.id}
             project={expandedProject}
             getOpacityRef={getOpacityRef}
             onClose={handleClose}
@@ -162,7 +162,11 @@ function App() {
       )}
 
       <div className="pointer-events-none fixed bottom-6 left-1/2 z-[60] flex -translate-x-1/2 items-center gap-3">
-        {expandedProject && (
+        {!expandedProject ? (
+          <p className="text-xs tracking-widest text-neutral-500 uppercase">
+            Drag to rotate · Click a face to explore
+          </p>
+        ) : (
           <>
             <button
               type="button"
@@ -175,25 +179,18 @@ function App() {
             >
               &lt;
             </button>
+            <button
+              type="button"
+              className="project-nav-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNavigateProject(1);
+              }}
+              aria-label="Next project"
+            >
+              &gt;
+            </button>
           </>
-        )}
-        <p className="text-xs tracking-widest text-neutral-500 uppercase">
-          {expandedProject
-            ? expandedProject.title
-            : "Drag to rotate · Click a face to explore"}
-        </p>
-        {expandedProject && (
-          <button
-            type="button"
-            className="project-nav-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleNavigateProject(1);
-            }}
-            aria-label="Next project"
-          >
-            &gt;
-          </button>
         )}
       </div>
     </div>
